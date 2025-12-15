@@ -11,15 +11,18 @@ def read_stock_names(file_name="watchlist.txt"):
 def get_all_stock_prices(stock_names_list):
     stock_client = StockClient.StockClient()
     stock_prices = []
+    stock_previous_close = []
     for stock in stock_names_list:  
-        stock_prices.append(stock_client.fetch_price(stock))
+        stock_data = stock_client.fetch_price(stock)
+        stock_prices.append(stock_data[0])
+        stock_previous_close.append(stock_data[1])
 
-    return stock_prices
+    return stock_prices, stock_previous_close
 
 def main():
     stock_names = read_stock_names()
-    stock_data = get_all_stock_prices(stock_names)
-    print(stock_data)
+    stock_prices, stock_previous_close = get_all_stock_prices(stock_names)
+    print(stock_prices, stock_previous_close)
 
 
 if __name__ == "__main__":
