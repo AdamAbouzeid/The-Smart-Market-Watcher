@@ -1,3 +1,4 @@
+import datetime
 def execution_logger(func):
     def wrapper(self, symbol, *args, **kwargs):
             now = datetime.datetime.now().strftime("%X")

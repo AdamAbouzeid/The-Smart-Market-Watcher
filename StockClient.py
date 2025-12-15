@@ -24,4 +24,6 @@ class StockClient:
             return None
 
         price = data['chart']['result'][0]['meta']['regularMarketPrice']
-        return price
+        previous_close = data['chart']['result'][0]['meta']['chartPreviousClose']
+
+        return [price, previous_close]
