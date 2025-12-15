@@ -71,12 +71,6 @@ The application fetches real-time prices and previous close values for selected 
 Run the application with a single command:
 
 ```bash
-python src/main.py
-```
-
-Or if you're in the `src` directory:
-
-```bash
 python main.py
 ```
 
