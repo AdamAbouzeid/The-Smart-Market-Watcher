@@ -10,7 +10,7 @@ def read_stock_names(file_name="watchlist.txt"):
     with open(file_name, "r") as file:
         for line in file:
             stock_names.append(line.strip())
-            
+
     return stock_names
 
 def get_all_stock_prices(stock_names_list):
@@ -24,10 +24,8 @@ def get_all_stock_prices(stock_names_list):
             stock_previous_close.append(stock_data[1])
 
     return stock_prices, stock_previous_close
-def main():
-    stock_names = read_stock_names()
-    stock_prices, stock_previous_close = get_all_stock_prices(stock_names)
 
+def create_data_frame(stock_names, stock_prices, stock_previous_close):
     stock_data = pd.DataFrame({
         "names": stock_names,
         "prices": stock_prices,
@@ -39,19 +37,15 @@ def main():
         / stock_data.previous_close * 100
     )
 
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    excel_file_name = f"stock_watch-{timestamp}.xlsx"
-    stock_data.to_excel(excel_file_name, index=False)
+    return stock_data
 
-
-    wb = load_workbook(excel_file_name)
-    sh = wb.active
+def color_cell(sh):
 
     positive_font = Font(color="00FF00")
     negative_font = Font(color="FF0000")
 
     CHANGE_COL = 4
-    
+
     for row in range(2, sh.max_row + 1):
         cell = sh.cell(row=row, column=CHANGE_COL)
         value = cell.value
@@ -63,6 +57,27 @@ def main():
             cell.font = positive_font
         elif value < 0:
             cell.font = negative_font
+
+
+def main():
+    stock_names = read_stock_names()
+    stock_prices, stock_previous_close = get_all_stock_prices(stock_names)
+
+    print("Creating data frame...")
+    stock_data = create_data_frame(stock_names, stock_prices, stock_previous_close)
+
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    excel_file_name = f"stock_watch-{timestamp}.xlsx"
+
+    print("Saving data to Excel...")
+    stock_data.to_excel(excel_file_name, index=False)
+
+
+    wb = load_workbook(excel_file_name)
+    sh = wb.active
+
+    print("Coloring cells...")
+    color_cell(sh)
 
     wb.save(excel_file_name)
 
