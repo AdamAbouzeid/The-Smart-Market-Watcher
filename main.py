@@ -2,7 +2,7 @@ import StockClient
 import datetime
 import pandas as pd
 from openpyxl import load_workbook
-from openpyxl.styles import PatternFill
+from openpyxl.styles import Font
 
 
 def read_stock_names(file_name="watchlist.txt"):
@@ -47,14 +47,26 @@ def main():
     wb = load_workbook(excel_file_name)
     sh = wb.active
 
-    positive_fill = PatternFill(start_color="00FF00", end_color="00FF00", fill_type="solid")
-    negative_fill = PatternFill(start_color="FF0000", end_color="FF0000", fill_type="solid")
+    positive_font = Font(color="00FF00")
+    negative_font = Font(color="FF0000")
 
-    for i in range(2, sh.max_column + 1):
-        if int(sh.cell(row=i, column=4).value) > 0:
-            sh.cell(row=i, column=4).fill = positive_fill
-        elif int(sh.cell(row=i, column=4).value) < 0:
-            sh.cell(row=i, column=4).fill = negative_fill
+    CHANGE_COL = 4
+    
+    for row in range(2, sh.max_row + 1):
+        cell = sh.cell(row=row, column=CHANGE_COL)
+        value = cell.value
+
+        if value is None:
+            continue
+
+        if value > 0:
+            cell.font = positive_font
+        elif value < 0:
+            cell.font = negative_font
+
+    wb.save(excel_file_name)
+
+
 
 if __name__ == "__main__":
     main()
