@@ -10,16 +10,16 @@
 ### datetime
 
 ## Instructions to Run the Code
-### Ensure you have Python installed on your machine.
-### Install the required libraries using pip:
-### pip install openpyxl pandas requests
+### 1. Ensure you have Python installed on your machine.
+### 2. Install the required libraries using pip:
+### *pip install openpyxl pandas requests*
 
-### Or you can use the provided requirements.txt file:
-### pip install -r requirements.txt
+### Or you can use the provided **requirements.txt** file:
+### *pip install -r requirements.txt*
 ### Just do 
-### python main.py
+### *python main.py*
 ### to run the code.
 
 ## Output
-### An Excel file named stock_report-{timestamp}.xlsx will be generated in the same directory as the script.
+### An Excel file named **stock_report-{timestamp}.xlsx** will be generated in the same directory as the script.
 ### The Excel file will contain the stock prices and percentage changes, with appropriate color coding for increases and decreases.
