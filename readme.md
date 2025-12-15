@@ -1,6 +1,6 @@
 # Estarta Stock Smart Watcher Task
 ## Task Description
-- fetch the real-time price and previous close of the stocks for Apple, Microsoft, Tesla and Nvidia, and then creates an Excel report listing those numbers.
+- Fetch the real-time price and previous close of the stocks for Apple, Microsoft, Tesla and Nvidia, and then creates an Excel report listing those numbers.
 - The numbers are colour-coded to differentiate between percentage increases and decreases.
 
 ## Libraries Used
@@ -15,7 +15,9 @@
 ```pip install openpyxl pandas requests```
 
     Or you can use the provided **requirements.txt** file:
-    ```pip install -r requirements.txt```
+    ``` bash
+    pip install -r requirements.txt
+    ```
 3. Just do 
     ```python main.py```
     to run the code.
