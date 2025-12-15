@@ -20,10 +20,10 @@ def color_cell(sh):
     positive_font = Font(color="00FF00")
     negative_font = Font(color="FF0000")
 
-    CHANGE_COL = 4
+    change_col = 4
 
     for row in range(2, sh.max_row + 1):
-        cell = sh.cell(row=row, column=CHANGE_COL)
+        cell = sh.cell(row=row, column=change_col)
         value = cell.value
 
         if value is None:
