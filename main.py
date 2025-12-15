@@ -1,10 +1,9 @@
 import datetime
-from StockService import read_stock_names, get_all_stock_prices
+from src.Stock.StockService import read_stock_names, get_all_stock_prices
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Font
-from ExcelService import create_data_frame, color_cell
-
+from src.ExcelService import create_data_frame, color_cell
 
 
 

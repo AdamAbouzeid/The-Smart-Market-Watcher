@@ -1,4 +1,4 @@
-import StockClient
+from .StockClient import StockClient
 
 def read_stock_names(file_name="watchlist.txt"):
     stock_names = []
@@ -9,7 +9,7 @@ def read_stock_names(file_name="watchlist.txt"):
     return stock_names
 
 def get_all_stock_prices(stock_names_list):
-    stock_client = StockClient.StockClient()
+    stock_client = StockClient()
     stock_prices = []
     stock_previous_close = []
     for stock in stock_names_list:  

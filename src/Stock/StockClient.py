@@ -1,11 +1,11 @@
 import requests
-import util
+from ..util import execution_logger
 
 class StockClient:
     def __init__(self, url="https://query1.finance.yahoo.com/v8/finance/chart/"):
         self.url = url
 
-    @util.execution_logger 
+    @execution_logger 
     def fetch_price(self, symbol):
         required_headers = {
             'User-Agent': 'Mozilla/5.0'
