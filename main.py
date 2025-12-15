@@ -1,62 +1,11 @@
-import StockClient
 import datetime
+from StockService import read_stock_names, get_all_stock_prices
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Font
+from ExcelService import create_data_frame, color_cell
 
 
-def read_stock_names(file_name="watchlist.txt"):
-    stock_names = []
-    with open(file_name, "r") as file:
-        for line in file:
-            stock_names.append(line.strip())
-
-    return stock_names
-
-def get_all_stock_prices(stock_names_list):
-    stock_client = StockClient.StockClient()
-    stock_prices = []
-    stock_previous_close = []
-    for stock in stock_names_list:  
-        stock_data = stock_client.fetch_price(stock)
-        if stock_data is not None:
-            stock_prices.append(stock_data[0])
-            stock_previous_close.append(stock_data[1])
-
-    return stock_prices, stock_previous_close
-
-def create_data_frame(stock_names, stock_prices, stock_previous_close):
-    stock_data = pd.DataFrame({
-        "names": stock_names,
-        "prices": stock_prices,
-        "previous_close": stock_previous_close
-    })
-
-    stock_data["change %"] = (
-        (stock_data.prices - stock_data.previous_close)
-        / stock_data.previous_close * 100
-    )
-
-    return stock_data
-
-def color_cell(sh):
-
-    positive_font = Font(color="00FF00")
-    negative_font = Font(color="FF0000")
-
-    CHANGE_COL = 4
-
-    for row in range(2, sh.max_row + 1):
-        cell = sh.cell(row=row, column=CHANGE_COL)
-        value = cell.value
-
-        if value is None:
-            continue
-
-        if value > 0:
-            cell.font = positive_font
-        elif value < 0:
-            cell.font = negative_font
 
 
 def main():
