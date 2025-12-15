@@ -80,7 +80,7 @@ Or if you're in the `src` directory:
 python main.py
 ```
 
-## 📊 Output
+## Output
 
 The application generates an Excel file with the following naming convention:
 ```
@@ -93,9 +93,9 @@ stock_watch-YYYY-MM-DD_HH-MM-SS.xlsx
 - Automatic color coding:
   - **Green** cells for price increases
   - **Red** cells for price decreases
-- ⏰ Timestamp in filename for version tracking
+-  Timestamp in filename for version tracking
 
-## ⚙️ Configuration
+## Configuration
 
 Edit the `watchlist.txt` file to monitor different stocks:
 
