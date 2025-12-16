@@ -18,12 +18,18 @@ class StockClient:
             data = response.json()
         except (KeyError, IndexError, TypeError):
             print("Could not fetch price for the given symbol.")
-            return None
+            return None, None
         except requests.exceptions.ConnectionError:
             print("Failed to connect to the server.")
-            return None
+            return None, None
+        except requests.exceptions.Timeout:
+            print("The request timed out.")
+            return None, None
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return None, None
 
         price = data['chart']['result'][0]['meta']['regularMarketPrice']
         previous_close = data['chart']['result'][0]['meta']['chartPreviousClose']
 
-        return [price, previous_close]
+        return price, previous_close

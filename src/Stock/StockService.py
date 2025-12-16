@@ -13,9 +13,9 @@ def get_all_stock_prices(stock_names_list):
     stock_prices = []
     stock_previous_close = []
     for stock in stock_names_list:  
-        stock_data = stock_client.fetch_price(stock)
-        if stock_data is not None:
-            stock_prices.append(stock_data[0])
-            stock_previous_close.append(stock_data[1])
+        current_price, previous_price = stock_client.fetch_price(stock)
+        if current_price is not None:
+            stock_prices.append(current_price)
+            stock_previous_close.append(previous_price)
 
     return stock_prices, stock_previous_close
